@@ -1,4 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        document.body.classList.remove('preload');
+    }, 100);
+
     const translations = {
         en: {
             nav_home: "Home", nav_about: "About", nav_projects: "Projects", nav_contact: "Contact",
@@ -69,6 +73,11 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const targetPage = link.getAttribute('data-page');
+            const currentPage = document.body.getAttribute('data-current-page');
+            
+            if (currentPage === targetPage) return;
+
+            mainHeader.classList.remove('initial-load');
             
             navLinks.forEach(nav => nav.classList.remove('active'));
             link.classList.add('active');
